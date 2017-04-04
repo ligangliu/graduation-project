@@ -19,8 +19,7 @@ def get_list_by_cursor(cursor):
 def get_all_stations():
 	stations = base_conn.get_collection_names()
 	count = len(stations)
-	print count
-	return {'stations':stations}
+	return {'stations':stations,'count':count}
 	#return jsonify({'stations':stations})
 	#return jsonify({'a':'dsaf'})
 #print get_all_stations()
@@ -34,24 +33,25 @@ def get_station_count(station_name):
 	return {'station_count':station_count}
 
 def get_list_by_station_time(station_name,starttime,endtime):
-	conn = base_conn.get_conn(collection_name=station_name)
-	# cursor = conn.find({
-	# 	'$and':[
-	# 		{'STATION':station_name},
-	# 		{'DATE':{'$gte':starttime,'$lte':endtime}}
-	# 	]
-	# })
-	cursor = conn.find({'STATION':station_name,'DATE':{'$gte':starttime,'$lte':endtime}},{'_id':0})
+	conn = base_conn.get_conn(station_name)
+	cursor = conn.find({
+		'$and':[
+			{'STATION':station_name},
+			{'DATE':{'$gte':starttime,'$lte':endtime}}
+		]
+	},{'_id':0,'TIME':1,'X':1,'Y':1,'Z':1})
+	#cursor = conn.find({'STATION':station_name,'DATE':{'$gte':starttime,'$lte':endtime}},{'_id':0})
 	list = get_list_by_cursor(cursor)
-	return {'list':list}
+	count = len(list)
+	return {'list':list,'count':count}
 
 # print get_all_stations()
 # print get_stations_count()
-# print get_station_count('person')
+# print get_station_count('Kourou')
 # @app.route('/')
 # def index():
 # 	return jsonify(get_list_by_station_time(station_name='person', starttime='2017-03-15', endtime='2017-03-16'))
-#def get_list_by_station_time(station_name='person', starttime='2017-03-15', endtime='2017-03-20'):
+print get_list_by_station_time(station_name='Kourou', starttime='2017-03-15', endtime='2017-03-16')
 
 # if __name__ == '__main__':
 #  	app.run(debug=True)

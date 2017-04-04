@@ -10,6 +10,18 @@ var a = {
 	'Y':'2',
 	'Z':'3'
 }
+var b = {
+		'DATE':'2017-03-17',
+		'TIME':'00:00:00',
+		'STATION':'Kourou',
+		'LOCATION':{
+		'Letitude':'5.210',
+		'Longitude':'307.269'
+	},
+	'X':'1',
+	'Y':'2',
+	'Z':'3'
+}
 var c = {
 		'DATE':'2017-03-19',
 		'TIME':'00:00:00',

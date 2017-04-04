@@ -9,8 +9,8 @@ import os
 from pymongo import MongoClient
 
 mongo_uri_auth = "mongodb://localhost:27017/"
-database_name = "person"
-collection_name = "person"
+database_name = "app"
+collection_name = "Kourou"
 
 def get_db(mongo_uri_auth=mongo_uri_auth,database_name=database_name):
 	client = MongoClient(mongo_uri_auth)
