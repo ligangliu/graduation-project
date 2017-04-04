@@ -1,0 +1,37 @@
+var a = {
+		'DATE':'2017-03-15',
+		'TIME':'00:00:00',
+		'STATION':'Kourou',
+		'LOCATION':{
+		'Letitude':'5.210',
+		'Longitude':'307.269'
+	},
+	'X':'1',
+	'Y':'2',
+	'Z':'3'
+}
+var c = {
+		'DATE':'2017-03-19',
+		'TIME':'00:00:00',
+		'STATION':'Kourou',
+		'LOCATION':{
+		'Letitude':'5.210',
+		'Longitude':'307.269'
+	},
+	'X':'1',
+	'Y':'2',
+	'Z':'3'
+}
+db.person.find({
+		'$and':[
+			{'STATION':'Kourou'},
+			{'DATE':{'$gte':'2017-03-15','$lte':'2017-03-17'}}
+		]
+	})
+def test():
+	list = []
+	conn = base_conn.get_conn(collection_name='person')
+	cursor = conn.find()
+	return get_list_by_cursor(cursor)
+	#return list
+print test()
