@@ -16,21 +16,28 @@ def get_list_by_cursor(cursor):
 	for x in cursor:
 		list.append(x)
 	return list
+def get_list_by_cursor_values(cursor):
+	list = []
+	for x in cursor:
+		list += (x.values())
+	return list
 def get_all_stations():
-	stations = base_conn.get_collection_names()
+	conn = base_conn.get_conn('station')
+	cursor = conn.find({},{'_id':0,'name':1})
+	stations = get_list_by_cursor_values(cursor)
 	count = len(stations)
 	return {'stations':stations,'count':count}
 	#return jsonify({'stations':stations})
 	#return jsonify({'a':'dsaf'})
 #print get_all_stations()
 
-def get_stations_count():
-	stations_count = len(base_conn.get_collection_names())
-	return {'stations_count':stations_count}
+# def get_stations_count():
+# 	stations_count = len(base_conn.get_collection_names())
+# 	return {'stations_count':stations_count}
 
 def get_station_count(station_name):
 	station_count = base_conn.get_conn(collection_name=station_name).find().count()
-	return {'station_count':station_count}
+	return {'count':station_count}
 
 def get_list_by_station_time(station_name,starttime,endtime):
 	conn = base_conn.get_conn(station_name)
@@ -45,13 +52,15 @@ def get_list_by_station_time(station_name,starttime,endtime):
 	count = len(list)
 	return {'list':list,'count':count}
 
-# print get_all_stations()
-# print get_stations_count()
-# print get_station_count('Kourou')
-# @app.route('/')
-# def index():
-# 	return jsonify(get_list_by_station_time(station_name='person', starttime='2017-03-15', endtime='2017-03-16'))
-print get_list_by_station_time(station_name='Kourou', starttime='2017-03-15', endtime='2017-03-16')
+def get_stations_by_location(x_latitude,y_latitude,x_longitude,y_longitude):
+	conn = base_conn.get_conn('station')
+	cursor = conn.find({
+		'$and':[
+			{'latitude':{'$gte':x_latitude,'$lte':y_latitude}},
+			{'longitude':{'$gte':x_longitude,'$lte':y_longitude}}
+		]
+		},{'_id':0,'name':1})
+	stations = get_list_by_cursor_values(cursor)
+	count = len(stations)
+	return {'stations':stations,'count':count}
 
-# if __name__ == '__main__':
-#  	app.run(debug=True)

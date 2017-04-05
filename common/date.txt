@@ -3,8 +3,8 @@ var a = {
 		'TIME':'00:00:00',
 		'STATION':'Kourou',
 		'LOCATION':{
-		'Letitude':'5.210',
-		'Longitude':'307.269'
+		'latitude':'5.210',
+		'longitude':'307.269'
 	},
 	'X':'1',
 	'Y':'2',
@@ -15,8 +15,8 @@ var b = {
 		'TIME':'00:00:00',
 		'STATION':'Kourou',
 		'LOCATION':{
-		'Letitude':'5.210',
-		'Longitude':'307.269'
+		'latitude':'5.210',
+		'longitude':'307.269'
 	},
 	'X':'1',
 	'Y':'2',
@@ -27,12 +27,22 @@ var c = {
 		'TIME':'00:00:00',
 		'STATION':'Kourou',
 		'LOCATION':{
-		'Letitude':'5.210',
-		'Longitude':'307.269'
+		'latitude':'5.210',
+		'longitude':'307.269'
 	},
 	'X':'1',
 	'Y':'2',
 	'Z':'3'
+}
+var d = {
+	'name':'Kourou',
+	'latitude':5.210,
+	'longitude':307.269
+}
+var d = {
+	'name':'test',
+	'latitude':4.90,
+	'longitude':310.25
 }
 db.person.find({
 		'$and':[
