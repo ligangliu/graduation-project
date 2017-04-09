@@ -8,9 +8,7 @@
 import os
 import base_conn
 from flask import Flask,jsonify
-#app = Flask(__name__)
 
-#@app.route('/')
 def get_list_by_cursor(cursor):
 	list = []
 	for x in cursor:
